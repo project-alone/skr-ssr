@@ -6,10 +6,8 @@ import {
 	Action,
 	ThunkAction,
 } from '@reduxjs/toolkit'
-
 import slice, { IState } from '@slices/index'
-
-const devMode = process.env.NODE_ENV === 'development'
+import { isDev } from '@lib/index'
 
 // custom middleware
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,13 +19,12 @@ const store = configureStore({
 	reducer: slice,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(loggerMiddleware),
-	devTools: devMode,
+	devTools: isDev,
 })
 const setupStore = (): EnhancedStore => store
-const makeStore = () => setupStore()
 
-export const wrapper = createWrapper<Store<IState>>(makeStore, {
-	debug: devMode,
+const wrapper = createWrapper<Store<IState>>(() => setupStore(), {
+	debug: isDev,
 })
 
 export type RootState = ReturnType<typeof store.getState>

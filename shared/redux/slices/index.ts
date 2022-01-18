@@ -7,7 +7,6 @@ export interface IState {
 	counter: CounterState
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const rootReducer = (state: IState | undefined, action: AnyAction) => {
 	switch (action.type) {
 		case HYDRATE: {
