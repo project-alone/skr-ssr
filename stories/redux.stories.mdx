@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import foldertreeByReduxImage from '@story/assets/redux-folder-structure.png'
+
+<Meta title="@redux-toolkit" />
+
+# @redux-toolkit
+
+redux의 고질적이고 복잡한 ducks pattern을 줄이고 코드 가독성을 높히기 위한 목적으로 사용
+
+## Folder Structure
+
+<img src={foldertreeByReduxImage} />
+
+##
+
+```scss
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+	font: 100% $font-stack;
+	color: $primary-color;
+}
+```
+
+export const Component = () => {
+	return <SyntaxHighlighter />
+}

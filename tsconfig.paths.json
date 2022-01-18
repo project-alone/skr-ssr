@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		/* Base directory to resolve non-absolute module names. */
+		"baseUrl": "./",
+		/* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+		"paths": {
+			"@components/*": ["shared/components/*"],
+			"@hooks/*": ["shared/hooks/*"],
+			"@styles/*": ["shared/styles/*"],
+			"@story/*": ["stories/*"],
+			"@actions/*": ["shared/redux/actions/*"],
+			"@slices/*": ["shared/redux/slices/*"],
+			"@store/*": ["shared/redux/store/*"],
+			"@fetch/*": ["shared/fetch/*"]
+		}
+	}
+}
