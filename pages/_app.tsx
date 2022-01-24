@@ -1,11 +1,11 @@
-import { AppProps } from 'next/app'
 import GlobalStyle from '@styles/global'
 import AppLayout from '@components/layout/AppLayout'
 import RouterGuard from '@components/layout/RouterGuard'
 import wrapper from '@store/index'
+import type { AppProps } from 'next/app'
 
-function MyApp(props: AppProps) {
-	const { Component, pageProps } = props
+function MyApp({ Component, pageProps }: AppProps) {
+	console.log('rendered _app.tsx')
 	return (
 		<AppLayout>
 			<GlobalStyle />

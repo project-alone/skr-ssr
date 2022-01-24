@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState, AppThunk } from '@store/index'
-import { fetchCount } from '@fetch/counter'
+import { getCount } from '@fetch/counter'
 
 export interface CounterState {
 	value: number
@@ -30,7 +29,7 @@ const initialState: CounterState = {
 export const incrementAsync = createAsyncThunk(
 	'counter/fetchCount',
 	async (amount: number) => {
-		const response = await fetchCount(amount)
+		const response = await getCount({ amount })
 
 		// return 값이 제대로 넘어 갔다면 action payload는 'fullfilled'가 됩니다.
 		return response.data

@@ -1,18 +1,13 @@
-import type { GetStaticProps, NextPage } from 'next'
 import { Form, Input, Checkbox, Button, Layout } from 'antd'
 
-interface PageProps {}
-
-export const getStaticProps: GetStaticProps<PageProps> = (context) => {
-	return {
-		props: {
-			a: 1,
-		},
-	}
+interface LoginFormValues {
+	email: string
+	password: string
+	remember: boolean
 }
 
-const Login: NextPage<PageProps> = (props) => {
-	const onFinish = (values: any) => {
+export default function Login() {
+	const onFinish = (values: LoginFormValues) => {
 		console.log('Success:', values)
 	}
 
@@ -36,24 +31,24 @@ const Login: NextPage<PageProps> = (props) => {
 				onFinishFailed={onFinishFailed}
 				autoComplete="off">
 				<Form.Item
-					label="Username"
-					name="username"
+					label="이메일"
+					name="email"
 					rules={[
 						{
 							required: true,
-							message: 'Please input your username!',
+							message: '이메일을 입력해주세요!',
 						},
 					]}>
-					<Input />
+					<Input placeholder="test@test.com" />
 				</Form.Item>
 
 				<Form.Item
-					label="Password"
+					label="비밀번호"
 					name="password"
 					rules={[
 						{
 							required: true,
-							message: 'Please input your password!',
+							message: '비밀번호를 입력해주세요!',
 						},
 					]}>
 					<Input.Password />
@@ -63,17 +58,15 @@ const Login: NextPage<PageProps> = (props) => {
 					name="remember"
 					valuePropName="checked"
 					wrapperCol={{ offset: 8, span: 16 }}>
-					<Checkbox>Remember me</Checkbox>
+					<Checkbox>기억하기</Checkbox>
 				</Form.Item>
 
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
 					<Button type="primary" htmlType="submit">
-						Submit
+						로그인
 					</Button>
 				</Form.Item>
 			</Form>
 		</Layout.Content>
 	)
 }
-
-export default Login

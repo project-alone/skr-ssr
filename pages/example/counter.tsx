@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import React from 'react'
 import { Layout, Button, Input } from 'antd'
 import { toNumber } from 'lodash-es'
@@ -14,19 +14,7 @@ import {
 
 const { Content } = Layout
 
-interface PageProps {
-	a: 1
-}
-
-export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-	return {
-		props: {
-			a: 1,
-		},
-	}
-}
-
-const Counter: NextPage<PageProps> = (props) => {
+export default function Counter() {
 	const count = useAppSelector(selectCount)
 	const dispatch = useAppDispatch()
 	const [incrementAmount, setIncrementAmount] = React.useState(2)
@@ -36,10 +24,6 @@ const Counter: NextPage<PageProps> = (props) => {
 	) => {
 		setIncrementAmount(toNumber(event.target.value))
 	}
-
-	React.useEffect(() => {
-		console.log(props)
-	}, [])
 
 	return (
 		<Content>
@@ -72,5 +56,3 @@ const Counter: NextPage<PageProps> = (props) => {
 		</Content>
 	)
 }
-
-export default Counter

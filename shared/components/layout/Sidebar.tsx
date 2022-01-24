@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link'
 import { Menu } from 'antd'
 import {
 	AppstoreOutlined,
@@ -8,11 +8,6 @@ import {
 import type { MenuClickEventHandler } from 'rc-menu/lib/interface'
 
 const { SubMenu, ItemGroup, Item } = Menu
-
-type MenuItem = {
-	key?: string
-	name: string
-}
 
 interface Props {}
 
@@ -29,34 +24,41 @@ const Sidebar: React.FC<Props> = (props) => {
 			defaultOpenKeys={['sub1']}
 			mode="inline">
 			<SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-				<ItemGroup key="g1" title="Item 1">
-					<Item key="1">Option 1</Item>
-					<Item key="2">Option 2</Item>
+				<ItemGroup key="g1" title="Examples">
+					<Item key="1">
+						<Link href="/example/counter">Counter</Link>
+					</Item>
+					<Item key="2">
+						<Link href="/example/forms">Forms</Link>
+					</Item>
+					<Item key="3">
+						<Link href="/example/login">Login</Link>
+					</Item>
 				</ItemGroup>
 				<ItemGroup key="g2" title="Item 2">
-					<Item key="3">Option 3</Item>
-					<Item key="4">Option 4</Item>
+					<Item key="4">Option 3</Item>
+					<Item key="5">Option 4</Item>
 				</ItemGroup>
 			</SubMenu>
 			<SubMenu
 				key="sub2"
 				icon={<AppstoreOutlined />}
 				title="Navigation Two">
-				<Item key="5">Option 5</Item>
-				<Item key="6">Option 6</Item>
+				<Item key="6">Option 5</Item>
+				<Item key="7">Option 6</Item>
 				<SubMenu key="sub3" title="Submenu">
-					<Item key="7">Option 7</Item>
-					<Item key="8">Option 8</Item>
+					<Item key="8">Option 7</Item>
+					<Item key="9">Option 8</Item>
 				</SubMenu>
 			</SubMenu>
 			<SubMenu
 				key="sub4"
 				icon={<SettingOutlined />}
 				title="Navigation Three">
-				<Item key="9">Option 9</Item>
-				<Item key="10">Option 10</Item>
-				<Item key="11">Option 11</Item>
-				<Item key="12">Option 12</Item>
+				<Item key="10">Option 9</Item>
+				<Item key="11">Option 10</Item>
+				<Item key="12">Option 11</Item>
+				<Item key="13">Option 12</Item>
 			</SubMenu>
 		</Menu>
 	)

@@ -12,7 +12,8 @@
 			"@slices/*": ["shared/redux/slices/*"],
 			"@store/*": ["shared/redux/store/*"],
 			"@fetch/*": ["shared/fetch/*"],
-			"@lib/*": ["shared/lib/*"]
+			"@lib/*": ["shared/lib/*"],
+			"@router/*": ["shared/router/*"]
 		}
 	}
 }

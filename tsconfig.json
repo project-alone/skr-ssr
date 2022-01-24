@@ -67,6 +67,6 @@
 		"resolveJsonModule": true,
 		"incremental": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".storybook/*.ts"],
+	"include": ["**/*.ts", "**/*.tsx", ".storybook/*.ts"],
 	"exclude": ["node_modules"]
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // import { userService } from 'services';
 
@@ -32,11 +34,27 @@ const RouterGuard: React.FC<Props> = ({ children, auth }) => {
 		authCheck(router.asPath)
 
 		// on route change start - authorized를 flase로 설정하여 초기 로딩을 감춘다.
-		const hideContent = () => setAuthorized(false)
-		router.events.on('routeChangeStart', hideContent)
+		const hideContent = () => {
+			setAuthorized(false)
+		}
+
+		router.events.on('routeChangeError', () => {
+			console.log('router 변경 중 오류가 발생했습니다.')
+			NProgress.done()
+		})
+
+		router.events.on('routeChangeStart', () => {
+			console.log('router 변경이 시작되었습니다.')
+			hideContent()
+			NProgress.start()
+		})
 
 		// on route change complete - route change가 긑날때 마다 authCheck 함수를 실행
-		router.events.on('routeChangeComplete', authCheck)
+		router.events.on('routeChangeComplete', (url) => {
+			console.log('router 변경이 종료되었습니다.')
+			authCheck(url)
+			NProgress.done()
+		})
 
 		// 구독 해지 시 등록된 이벤트를 해지
 		return () => {

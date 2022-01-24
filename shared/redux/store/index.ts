@@ -1,39 +1,47 @@
 import { createWrapper } from 'next-redux-wrapper'
+import { configureStore, EnhancedStore, Store } from '@reduxjs/toolkit'
 import {
-	configureStore,
-	EnhancedStore,
-	Store,
-	Action,
-	ThunkAction,
-} from '@reduxjs/toolkit'
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 import slice, { IState } from '@slices/index'
 import { isDev } from '@lib/index'
+import middlewares from '@store/middlewares'
 
-// custom middleware
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const loggerMiddleware = () => (next: any) => (action: any) => {
-	return next(action)
+const persistConfig = {
+	key: 'root', // key명은 변경해서 사용하세요
+	version: 1,
+	storage,
 }
+const persistedReducer = persistReducer(persistConfig, slice)
 
 const store = configureStore({
-	reducer: slice,
+	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(loggerMiddleware),
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [
+					FLUSH,
+					REHYDRATE,
+					PAUSE,
+					PERSIST,
+					PURGE,
+					REGISTER,
+				],
+			},
+		}).concat(...middlewares),
 	devTools: isDev,
 })
 const setupStore = (): EnhancedStore => store
-
 const wrapper = createWrapper<Store<IState>>(() => setupStore(), {
 	debug: isDev,
 })
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export type AppThunk<ReturnType = void> = ThunkAction<
-	ReturnType,
-	RootState,
-	unknown,
-	Action<string>
->
 
 export default wrapper

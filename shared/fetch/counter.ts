@@ -1,6 +1,24 @@
-// A mock function to mimic making an async request for data
-export function fetchCount(amount = 1) {
-	return new Promise<{ data: number }>((resolve) =>
-		setTimeout(() => resolve({ data: amount }), 500),
-	)
+import http from '@fetch/http'
+
+/**
+ * @description
+ * getCount의 요청 parameter
+ */
+interface GetCountParmas {
+	amount?: number
+}
+
+/**
+ * @description
+ * getCount의 응답 결과
+ */
+type GetCountRes = number
+
+/**
+ *
+ * @param {GetCountParmas} params
+ * @returns
+ */
+export function getCount(params: GetCountParmas) {
+	return http.get<GetCountRes>('/', { params })
 }

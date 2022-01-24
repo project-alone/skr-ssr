@@ -1,24 +1,11 @@
 import Head from 'next/head'
 import { Tabs, Layout } from 'antd'
 import { Home as Index } from '@styles/pages'
-import { NextPage, GetServerSideProps, GetStaticProps } from 'next'
 
 const { TabPane } = Tabs
 const { Content } = Layout
 
-export const getStaticProps: GetStaticProps = async (context) => {
-	return {
-		props: {
-			a: 1,
-		},
-	}
-}
-
-interface Props {
-	userAgent?: string
-}
-
-const Home: NextPage<Props> = (props) => {
+export default function Home() {
 	const onChangeTab = (key: string) => {
 		console.log('탭 전환', key)
 	}
@@ -49,5 +36,3 @@ const Home: NextPage<Props> = (props) => {
 		</Content>
 	)
 }
-
-export default Home
