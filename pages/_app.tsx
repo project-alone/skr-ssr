@@ -1,17 +1,16 @@
-import GlobalStyle from '@styles/global'
-import AppLayout from '@components/layout/AppLayout'
-import RouterGuard from '@components/layout/RouterGuard'
-import wrapper from '@store/index'
 import type { AppProps } from 'next/app'
+import { AppLayout, RouterGuard } from '@components/layout'
+import wrapper, { persistor } from '@store/index'
+import { PersistGateForSSR } from '@store/persist'
 
-function MyApp({ Component, pageProps }: AppProps) {
-	console.log('rendered _app.tsx')
+const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (
 		<AppLayout>
-			<GlobalStyle />
-			<RouterGuard>
-				<Component {...pageProps} />
-			</RouterGuard>
+			<PersistGateForSSR persistor={persistor}>
+				<RouterGuard>
+					<Component {...pageProps} />
+				</RouterGuard>
+			</PersistGateForSSR>
 		</AppLayout>
 	)
 }

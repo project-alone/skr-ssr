@@ -1,13 +1,13 @@
 import type { FC } from 'react'
 import { Layout, Row, Col, Avatar } from 'antd'
-import Logo from '@components/common/Logo'
+import { Logo } from '@components/common'
 import { UserOutlined } from '@ant-design/icons'
 
 const { Header } = Layout
 
 interface Props {}
 
-const AppHeader: FC<Props> = () => {
+export const AppHeader: FC<Props> = () => {
 	return (
 		<Header>
 			<Row justify="space-between">
@@ -24,5 +24,3 @@ const AppHeader: FC<Props> = () => {
 		</Header>
 	)
 }
-
-export default AppHeader

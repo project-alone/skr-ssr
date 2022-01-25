@@ -1,16 +1,16 @@
 import type { FC } from 'react'
 import { Layout } from 'antd'
-import Sidebar from '@components/layout/Sidebar'
-import AppHeader from '@components/layout/AppHeader'
-import AppFooter from '@components/layout/AppFooter'
+import GlobalStyle from '@styles/global'
+import { Sidebar, AppHeader, AppFooter } from '@components/layout'
 
-const { Sider, Content, Footer } = Layout
+const { Sider, Content } = Layout
 
 interface Props {}
 
-const AppLayout: FC<Props> = (props) => {
+export const AppLayout: FC<Props> = (props) => {
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
+			<GlobalStyle />
 			<AppHeader />
 			<Layout>
 				<Sider width="auto" style={{ backgroundColor: '#fff' }}>
@@ -26,5 +26,3 @@ const AppLayout: FC<Props> = (props) => {
 		</Layout>
 	)
 }
-
-export default AppLayout

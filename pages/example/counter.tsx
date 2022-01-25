@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import React from 'react'
 import { Layout, Button, Input } from 'antd'
 import { toNumber } from 'lodash-es'

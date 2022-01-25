@@ -1,9 +1,18 @@
 import Head from 'next/head'
 import { Tabs, Layout } from 'antd'
 import { Home as Index } from '@styles/pages'
+import wrapper from '@store/index'
 
 const { TabPane } = Tabs
 const { Content } = Layout
+
+export const getServerSideProps = wrapper.getStaticProps(
+	(store) => async (context) => {
+		return {
+			props: {},
+		}
+	},
+)
 
 export default function Home() {
 	const onChangeTab = (key: string) => {
@@ -21,17 +30,7 @@ export default function Home() {
 					/>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
-				<Tabs defaultActiveKey="1" type="card" onChange={onChangeTab}>
-					<TabPane tab="Tab 1" key="1">
-						<Content>Content of Tab Pane 1</Content>
-					</TabPane>
-					<TabPane tab="Tab 2" key="2">
-						<Content>Content of Tab Pane 2</Content>
-					</TabPane>
-					<TabPane tab="Tab 3" key="3">
-						<Content>Content of Tab Pane 3</Content>
-					</TabPane>
-				</Tabs>
+				<p>index 페이지 입니다.</p>
 			</Index>
 		</Content>
 	)

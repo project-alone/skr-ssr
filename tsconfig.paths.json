@@ -5,7 +5,6 @@
 		/* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
 		"paths": {
 			"@components/*": ["shared/components/*"],
-			"@hooks/*": ["shared/hooks/*"],
 			"@styles/*": ["shared/styles/*"],
 			"@story/*": ["stories/*"],
 			"@actions/*": ["shared/redux/actions/*"],
@@ -13,6 +12,7 @@
 			"@store/*": ["shared/redux/store/*"],
 			"@fetch/*": ["shared/fetch/*"],
 			"@lib/*": ["shared/lib/*"],
+			"@hooks/*": ["shared/lib/hooks/*"],
 			"@router/*": ["shared/router/*"]
 		}
 	}

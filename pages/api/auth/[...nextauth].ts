@@ -1,10 +1,14 @@
 import NextAuth from 'next-auth'
-import ProvidersCredentials from 'next-auth/providers/credentials'
+import CredentialsProvider from 'next-auth/providers/credentials'
+
+/**
+ * @see https://next-auth.js.org/
+ */
 
 export default NextAuth({
 	providers: [
-		/** email과 password를 입력받는 인증을 구현 */
-		ProvidersCredentials({
+		/** 예시) email과 password를 입력받는 인증을 구현 */
+		CredentialsProvider({
 			id: 'email-password-credential',
 			name: 'Credentials',
 			/**

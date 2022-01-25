@@ -1,6 +1,5 @@
 import { HYDRATE } from 'next-redux-wrapper'
 import { combineReducers, AnyAction } from '@reduxjs/toolkit'
-
 import CounterReducer from '@slices/counter'
 import type { CounterState } from '@slices/counter'
 import UserSlice from '@slices/users'

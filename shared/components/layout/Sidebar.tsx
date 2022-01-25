@@ -11,7 +11,7 @@ const { SubMenu, ItemGroup, Item } = Menu
 
 interface Props {}
 
-const Sidebar: React.FC<Props> = (props) => {
+export const Sidebar: React.FC<Props> = (props) => {
 	const onClickMenu: MenuClickEventHandler = (info) => {
 		console.log('메뉴 클릭 정보', info)
 	}
@@ -63,5 +63,3 @@ const Sidebar: React.FC<Props> = (props) => {
 		</Menu>
 	)
 }
-
-export default Sidebar

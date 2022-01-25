@@ -10,7 +10,6 @@ import reduxLogger from 'redux-logger'
  */
 
 const loggerMiddleware: Middleware = () => (next) => (action) => {
-	console.log('custom logger')
 	return next(action)
 }
 

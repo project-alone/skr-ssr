@@ -1,7 +1,3 @@
-import { NextPage } from 'next'
-
-interface PageProps {}
-
 export default function NotFoundPage() {
 	return (
 		<>

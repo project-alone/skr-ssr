@@ -9,7 +9,7 @@ interface Props {
 	auth?: boolean
 }
 
-const RouterGuard: React.FC<Props> = ({ children, auth }) => {
+export const RouterGuard: React.FC<Props> = ({ children, auth }) => {
 	const router = useRouter()
 	const [authorized, setAuthorized] = React.useState(false)
 
@@ -69,5 +69,3 @@ const RouterGuard: React.FC<Props> = ({ children, auth }) => {
 		return <></>
 	}
 }
-
-export default RouterGuard

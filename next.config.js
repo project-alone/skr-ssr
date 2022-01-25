@@ -18,7 +18,7 @@ const nextConfig = {
 	},
 
 	/**
-	 * @default {'.next'}
+	 * @default '.next'
 	 */
 	distDir: 'build',
 
@@ -41,12 +41,12 @@ const nextConfig = {
 		if (process.env.NODE_ENV === 'development') {
 			/**
 			 * for development
-			 * api proxy(cors 우회)
+			 * proxy for fetch api(cors 우회)
 			 */
 			return [
 				{
 					// 요청 한 uri
-					source: '/api/:path*',
+					source: '/beapi/:path*',
 					// 변경 되서 요청되는 uri
 					destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
 				},
