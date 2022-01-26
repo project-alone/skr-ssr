@@ -34,31 +34,37 @@ export const Sidebar: React.FC<Props> = (props) => {
 					<Item key="3">
 						<Link href="/example/login">Login</Link>
 					</Item>
+					<Item key="4">
+						<Link href="/example/grid">Grid</Link>
+					</Item>
+					<Item key="5">
+						<Link href="/example/portal">Portal</Link>
+					</Item>
 				</ItemGroup>
 				<ItemGroup key="g2" title="Item 2">
-					<Item key="4">Option 3</Item>
-					<Item key="5">Option 4</Item>
+					<Item key="g2-1">Option 3</Item>
+					<Item key="g2-2">Option 4</Item>
 				</ItemGroup>
 			</SubMenu>
 			<SubMenu
 				key="sub2"
 				icon={<AppstoreOutlined />}
 				title="Navigation Two">
-				<Item key="6">Option 5</Item>
-				<Item key="7">Option 6</Item>
+				<Item key="sub2-1">Option 5</Item>
+				<Item key="sub2-2">Option 6</Item>
 				<SubMenu key="sub3" title="Submenu">
-					<Item key="8">Option 7</Item>
-					<Item key="9">Option 8</Item>
+					<Item key="sub3-1">Option 7</Item>
+					<Item key="sub3-2">Option 8</Item>
 				</SubMenu>
 			</SubMenu>
 			<SubMenu
 				key="sub4"
 				icon={<SettingOutlined />}
 				title="Navigation Three">
-				<Item key="10">Option 9</Item>
-				<Item key="11">Option 10</Item>
-				<Item key="12">Option 11</Item>
-				<Item key="13">Option 12</Item>
+				<Item key="sub4-1">Option 9</Item>
+				<Item key="sub4-2">Option 10</Item>
+				<Item key="sub4-3">Option 11</Item>
+				<Item key="sub4-4">Option 12</Item>
 			</SubMenu>
 		</Menu>
 	)

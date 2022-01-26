@@ -44,3 +44,14 @@ declare global {
 		Action<string>
 	>
 }
+
+// jspdf-autotable
+declare module 'jspdf-autotable' {
+	const _default: any
+	export default _default
+}
+
+declare module 'faker' {
+	const _default: any
+	export default _default
+}

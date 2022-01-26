@@ -1,10 +1,10 @@
+import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
-import { Button, Checkbox, Input, Form, Select, Radio } from 'antd'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import styled from 'styled-components'
 import { omit } from 'lodash-es'
+import { Button, Checkbox, Input, Form, Select, Radio, DatePicker } from 'antd'
+import { signUpScheme } from '@lib/validate/signUp'
+import moment, { Moment } from 'moment'
 
 type SignUpFormData = {
 	userId: string
@@ -13,45 +13,53 @@ type SignUpFormData = {
 	fruits: string[]
 	animals: string
 	alphabet: string
+	date: string | null
 }
-
-const Alert = styled.strong`
-	color: red;
-`
+type FormItemData = { label: string; value: string }
 
 const Message: React.FC<{ message: string }> = ({ message }) => {
-	return <Alert>{message}</Alert>
+	return <strong style={{ color: 'red' }}>{message}</strong>
+}
+const renderFormItemToArray = (
+	list: FormItemData[],
+	Component: typeof Select.Option | typeof Radio,
+) => {
+	// <Select.Option value={value}>{label}</Select.Option>
+	// <Radio value={value}>{label}</Radio>
+	return list.map(({ value, label }) => (
+		<Component value={value}>{label}</Component>
+	))
 }
 
-const scheme = yup.object({
-	userId: yup.string().required('입력값이 없습니다.'),
-	password: yup
-		.string()
-		.required('비밀번호를 입력해주세요.')
-		.min(8, '8자 이상이어야 합니다.')
-		.max(12, '12자리 이하여야 합니다.')
-		.matches(
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/g,
-			'대문자 하나 이상, 소문자 하나, 숫자 하나 및 특수 문자 하나 이상 포함하여야 합니다.',
-		),
-	term: yup.boolean(),
-	fruits: yup
-		.array()
-		.of(yup.string())
-		.min(2, '2개 이상 선택')
-		.required('선택하세요'),
-	animals: yup.string().required('선택해주세요'),
-	alphabet: yup.string().required('알파벳을 선택해주세요'),
-})
-
 export default function SignUpPage() {
+	const [checkboxValues] = React.useState<FormItemData[]>([
+		{ label: '사과', value: 'apple' },
+		{ label: '오렌지', value: 'orange' },
+		{ label: '바나나', value: 'banana' },
+		{ label: '딸기', value: 'strawberry' },
+	])
+	const [selectOptions] = React.useState<FormItemData[]>([
+		{ value: 'lion', label: '사자' },
+		{ value: 'rabbit', label: '토끼' },
+		{ value: 'monkey', label: '원숭이' },
+		{ value: 'cow', label: '젖소' },
+		{ value: 'tiger', label: '호랑이' },
+	])
+	const [radioGroup] = React.useState<FormItemData[]>([
+		{ label: 'a', value: 'a' },
+		{ label: 'b', value: 'b' },
+		{ label: 'c', value: 'c' },
+		{ label: 'd', value: 'd' },
+		{ label: 'e', value: 'e' },
+	])
 	const {
 		handleSubmit,
 		formState: { errors },
 		control,
+		getValues,
 	} = useForm<SignUpFormData>({
 		mode: 'onBlur',
-		resolver: yupResolver(scheme),
+		resolver: signUpScheme,
 		defaultValues: {
 			term: false,
 		},
@@ -61,7 +69,7 @@ export default function SignUpPage() {
 		console.log('submit data : ', data)
 	})
 
-	console.log(errors)
+	console.log('values', getValues())
 
 	return (
 		<Form onFinish={onSubmit}>
@@ -100,15 +108,7 @@ export default function SignUpPage() {
 					control={control}
 					name="fruits"
 					render={({ field }) => (
-						<Checkbox.Group
-							{...field}
-							options={[
-								{ label: '사과', value: 'apple' },
-								{ label: '오렌지', value: 'orange' },
-								{ label: '바나나', value: 'banana' },
-								{ label: '딸기', value: 'strawberry' },
-							]}
-						/>
+						<Checkbox.Group {...field} options={checkboxValues} />
 					)}
 				/>
 				<ErrorMessage errors={errors} name="fruits" render={Message} />
@@ -120,11 +120,10 @@ export default function SignUpPage() {
 					name="animals"
 					render={({ field }) => (
 						<Select placeholder="동물 선택" {...field}>
-							<Select.Option value="lion">사자</Select.Option>
-							<Select.Option value="rabbit">토끼</Select.Option>
-							<Select.Option value="monkey">원숭이</Select.Option>
-							<Select.Option value="cow">젖소</Select.Option>
-							<Select.Option value="tiger">호랑이</Select.Option>
+							{renderFormItemToArray(
+								selectOptions,
+								Select.Option,
+							)}
 						</Select>
 					)}
 				/>
@@ -137,11 +136,7 @@ export default function SignUpPage() {
 					name="alphabet"
 					render={({ field }) => (
 						<Radio.Group {...field}>
-							<Radio value="a">A</Radio>
-							<Radio value="b">B</Radio>
-							<Radio value="c">C</Radio>
-							<Radio value="d">D</Radio>
-							<Radio value="e">E</Radio>
+							{renderFormItemToArray(radioGroup, Radio)}
 						</Radio.Group>
 					)}
 				/>
@@ -149,6 +144,25 @@ export default function SignUpPage() {
 					errors={errors}
 					name="alphabet"
 					render={Message}
+				/>
+			</div>
+
+			<div>
+				<Controller
+					control={control}
+					name="date"
+					render={({ field }) => (
+						<DatePicker
+							{...omit(field, ['value', 'onChange'])}
+							value={moment(field.value)}
+							onChange={(date) =>
+								field.onChange(
+									(date as Moment).format('YYYY/MM/DD'),
+								)
+							}
+							picker="date"
+						/>
+					)}
 				/>
 			</div>
 
