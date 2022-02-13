@@ -18,6 +18,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     }
     ${require('antd/dist/antd.css')}
+
+    .site-layout-content {
+        min-height: 280px;
+        padding: 24px;
+        background: #fff;
+    }
+
+    .page-header {
+        border: 1px solid #eee;
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
 `
 
 export default GlobalStyle

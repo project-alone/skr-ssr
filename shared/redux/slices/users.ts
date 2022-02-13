@@ -1,14 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { isNull } from 'lodash-es'
 import { getUsers } from '@fetch/users'
-
-interface User {
-	id: string
-	first_name: string
-	last_name: string
-	email: string
-	ip_address: string
-}
+import { User } from 'pages/api/userList'
 
 export interface UserState {
 	user: User[] | null

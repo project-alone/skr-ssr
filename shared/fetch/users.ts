@@ -10,5 +10,5 @@ interface GetUsersFetch {
 }
 
 export const getUsers: GetUsersFetch = async (params?: GetUsersParams) => {
-	return await http.get<GetUsersRes>('/beapi/users', { params })
+	return await http.get<GetUsersRes>('/api/userList')
 }

@@ -13,6 +13,7 @@ import { isServer } from '@lib/index'
 import { PersistGate } from 'redux-persist/integration/react'
 import type { Persistor } from 'redux-persist'
 import type { Reducer, Store } from '@reduxjs/toolkit'
+import type { IState } from '@slices/index'
 
 const persistConfig = {
 	key: 'root', // key명은 변경해서 사용하세요
@@ -36,5 +37,5 @@ export const PersistGateForSSR: React.FC<{ persistor: Persistor }> = (
 
 export const actionTypes = [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
 export let createPersistor = (store: Store) => persistStore(store)
-export const createPersistedReducer = (slice: Reducer) =>
+export const createPersistedReducer = (slice: Reducer<IState>) =>
 	persistReducer(persistConfig, slice)

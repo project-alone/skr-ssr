@@ -25,24 +25,6 @@ declare global {
 		req: Req & NextApiRequest,
 		res: NextApiResponse,
 	) => void
-
-	/**
-	 * @category redux
-	 */
-
-	/** @title RootState 전체 state의 타입 */
-	type RootState = ReturnType<typeof store.getState>
-
-	/** @title useDispatch의 타입 */
-	type AppDispatch = typeof store.dispatch
-
-	/** @title custom thunk 생성시 사용 가능한 return 타입 */
-	type AppThunk<ReturnType = void> = ThunkAction<
-		ReturnType,
-		RootState,
-		unknown,
-		Action<string>
-	>
 }
 
 // jspdf-autotable

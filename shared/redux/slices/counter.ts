@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getCount } from '@fetch/counter'
+import type { AppThunk, RootState } from '@store/index'
 
 export interface CounterState {
 	value: number
